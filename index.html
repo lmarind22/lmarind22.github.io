@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luis Marin Diaz</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Enlaza a tu archivo CSS -->
+    <link rel="stylesheet" href="pages/css/styles.css"> <!-- Enlaza a tu archivo CSS -->
 </head>
 <body>
     <!-- Barra de navegación -->
     <header>
         <div class="navbar">
-            <img src="logo.png" alt="Clases de Física" class="logo">
+            <img src="pages/assets/logo.png" alt="Clases de Física" class="logo">
             <!-- Botón para menú desplegable -->
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <nav class="menu">
                 <ul>
-                    <li><a href="QuienesSomos.html">Quiénes somos</a></li>
+                    <li><a href="pages/QuienesSomos.html">Quiénes somos</a></li>
                     <li><a href="#">Recursos Astoreca</a></li>
                     <li><a href="#">Otras Experiencias</a></li>
                     <li><a href="#">Contacto</a></li>
@@ -27,7 +27,7 @@
     <!-- Contenido principal -->
     <main>
         <section class="banner">
-            <h1>Recursos y prácticas efectivas y replicables</h1>
+            <h1>Laboratorios de Física</h1>
         </section>
 
         <section class="recursos">
@@ -35,12 +35,12 @@
             <div class="recursos-grid">
                 <!-- Recurso 1 -->
                 <div class="recurso">
-                    <img src="recurso1.png" alt="Recurso 1">
-                    <h3>Trabajando mis fortalezas: Soy Correcto</h3>
+                    <img src="pages/assets/recurso1.png" alt="Recurso 1">
+                    <h3>Calor específico</h3>
                     <div class="rating">
                         ★★★★★
                     </div>
-                    <button>Ver más</button>
+                    <a href="pages/recurso1.html"><button>Ver más</button></a>
                 </div>
                 <!-- Recurso 2 -->
                 <div class="recurso">
@@ -90,12 +90,7 @@
             </div>
         </section>
     </main>
-    <script>
-        // Función para mostrar u ocultar el menú
-        function toggleMenu() {
-            var menu = document.querySelector('.menu');
-            menu.classList.toggle('active');
-        }
-    </script>
+    <!-- Enlace al archivo JavaScript -->
+    <script src="pages/js/scripts.js"></script>
 </body>
 </html>
