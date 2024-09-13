@@ -25,6 +25,18 @@ body {
     margin-bottom: 10px;
 }
 
+.menu-toggle {
+    display: none; /* Oculto por defecto en pantallas grandes */
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+nav.menu {
+    display: flex; /* Menú visible por defecto en pantallas grandes */
+}
+
 nav ul {
     list-style: none;
     display: flex;
@@ -36,20 +48,35 @@ nav ul li a {
     color: #333;
 }
 
-.search-bar {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 10px;
+/* Estilos para el menú en móviles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Mostrar el botón en pantallas pequeñas */
+    }
+
+    nav.menu {
+        display: none; /* Ocultar el menú por defecto en pantallas pequeñas */
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav.menu.active {
+        display: flex; /* Mostrar el menú cuando se active el botón */
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+        margin-top: 10px;
+    }
+
+    nav ul li {
+        margin-bottom: 5px;
+    }
 }
 
-.search-bar input {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Banner */
+/* Estilos para el banner y recursos */
 .banner {
     background-color: #f1f1f1;
     text-align: center;
@@ -60,7 +87,6 @@ nav ul li a {
     font-size: 24px;
 }
 
-/* Sección de recursos */
 .recursos {
     padding: 20px;
 }
@@ -106,64 +132,7 @@ button:hover {
     background-color: #c77800;
 }
 
-/* Media Queries para pantallas más pequeñas */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .search-bar {
-        margin-top: 10px;
-    }
-
-    .banner h1 {
-        font-size: 20px;
-    }
-
-    .recursos-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-}
-
 @media (max-width: 480px) {
-    .navbar {
-        text-align: center;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .banner h1 {
-        font-size: 18px;
-    }
-}
-/* Estilos básicos que ya hemos definido antes */
-
-/* Media Queries para pantallas más pequeñas */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .search-bar {
-        margin-top: 10px;
-    }
-
-    .banner h1 {
-        font-size: 20px;
-    }
-
-    .recursos-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    /* Ajustes específicos para móviles */
     .navbar {
         flex-direction: column;
         align-items: center;
@@ -177,13 +146,10 @@ button:hover {
         margin-top: 10px;
     }
 
-    nav ul li {
-        margin-bottom: 5px;
-    }
-
     .search-bar {
         width: 100%;
         justify-content: center;
+        margin-top: 10px;
     }
 
     .search-bar input {
@@ -202,7 +168,7 @@ button:hover {
     }
 
     .recurso h3 {
-        font-size: 14px; /* Ajustar el tamaño del texto */
+        font-size: 14px;
     }
 
     button {
