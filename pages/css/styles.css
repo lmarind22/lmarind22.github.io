@@ -118,7 +118,7 @@ nav ul li a {
 }
 
 .banner h1 {
-    font-size: 24px;
+    font-size: 28px;
 }
 
 .recursos {
@@ -140,7 +140,7 @@ nav ul li a {
 }
 
 .recurso img {
-    width: 100%;
+    width: 35%;
     height: auto;
 }
 

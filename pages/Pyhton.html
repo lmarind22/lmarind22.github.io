@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recurso 1 - Trabajando mis fortalezas: Soy Correcto</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Enlaza a tu archivo CSS -->
+    <!-- Incluir MathJax para renderizar las ecuaciones -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<body>
+     <!-- Barra de navegación común para todas las páginas -->
+     <header>
+        <div class="navbar">
+            <img src="assets/logo.png" alt="Logo Educando Juntos" class="logo">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="menu">
+                <ul>
+                    <li><a href="./../index.html">Inicio</a></li>
+                    <li><a href="#">Quiénes somos</a></li>
+                    <li><a href="#">Recursos Astoreca</a></li>
+                    <li><a href="#">Otras Experiencias</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Contenido de la página de recurso -->
+    <main>
+    <h1>Guía de instalación de distribuciones Python y la gestión de proyectos Python en Windows</h1>
+    <p><strong>Versión</strong>: V-00-02</p>
+    <p><strong>Fecha</strong>: 19/08/2024</p>
+    <p><strong>Adaptado por</strong>: C. Beitia del trabajo de base de Amal Chabli/Francois Bertin</p>
+    <p><strong>Modificado por</strong>: L. Marín</p>
+
+    <h2>I - Introducción</h2>
+    <p>En el contexto de trabajo colaborativo que incluye la programación de códigos en un lenguaje determinado, es crucial:</p>
+    <ul>
+        <li>Establecer un marco común de desarrollo:
+            <ul>
+                <li>Lenguaje de programación e infraestructura de desarrollo asociada.</li>
+                <li>Coherencia de la versión del lenguaje y su infraestructura de programación.</li>
+                <li>Control y trazabilidad de las versiones del programa y sus cambios.</li>
+            </ul>
+        </li>
+    </ul>
+    <p>En esta guía, dentro del contexto de la elaboración de proyectos colaborativos, se ha optado por utilizar Python. Esta selección se basa en la pertinencia y facilidad de uso, así como en la importancia de su comunidad internacional. Python se ha convertido en el lenguaje de referencia para el tratamiento masivo de datos y es ideal para la creación de prototipos de flujos de análisis rápidos y eficientes.</p>
+
+    <p>La infraestructura software asociada será:</p>
+    <ul>
+        <li><strong>Python xx.xx</strong>
+            <ul>
+                <li>Lenguaje de programación</li>
+                <li>Librerías básicas: Numpy, Pandas, Scipy, Matplotlib</li>
+                <li>Librerías específicas según el problema en consideración</li>
+            </ul>
+        </li>
+        <li><strong>Jupyter-Lab notebooks</strong>
+            <ul>
+                <li>Interfaz de enseñanza, documentación, intercambio de código y explotación en webAPP.</li>
+            </ul>
+        </li>
+        <li><strong>Spyder</strong> como entorno de desarrollo, “debug” y test de los códigos.</li>
+        <li><strong>Git y Github</strong> para la administración de versiones y repositorio del código.</li>
+    </ul>
+    <p>Nos concentraremos en esta primera etapa en la gestión de Python en ambientes virtuales. En próximas versiones se documentarán otros aspectos.</p>
+
+    <h2>II - Instalación de una versión específica de Python</h2>
+    <p>La última versión de Python se puede encontrar en el <a href="https://www.python.org/" target="_blank">sitio oficial</a> en la sección de "Download" a fecha de 19/08/2024.</p>
+    <p>La versión actual de Python en el sitio es Python 3.12. Aunque sea posible descargar la versión 3.13, se recomienda descargar la versión estable 3.12. Recuerda que las versiones anteriores también pueden ser descargadas si otros scripts han sido desarrollados con versiones anteriores, ya que la compatibilidad ascendente en Python está asegurada, pero la descendiente no.</p>
+
+    <h3>Instalación en Windows 11.x.x</h3>
+    <ol>
+        <li>Descarga el ejecutable de instalación de la versión Python 3.12 desde el sitio oficial.</li>
+        <li>Ejecuta el instalador y elige la opción de instalación personalizada para poder seleccionar los directorios de instalación.</li>
+        <li>Selecciona el directorio donde se desea instalar python, esta dirección debe ser fácil de reconocer y ubicar:</li>
+        <pre><code>C:\Users\login\Pyversion\Python312</code></pre>
+        <p>En este caso, de antemano, se crea la carpeta <code>PyVersion</code> para guardar las instalaciones de las distintas versiones de python con las que se desean trabajar. Además, se sugiere que en el directorio <code>C:\Users\login\</code> se cree una carpeta <code>PyVenv</code>, para guardar los entornos virtuales de los proyectos asociados.</p>
+        <p>Termina la instalación. Ahora estás listo para crear los entornos virtuales asociados a los diferentes proyectos.</p>
+    </ol>
+
+    <h2>III - Creación del entorno virtual de trabajo para proyectos determinados</h2>
+    <p>Para asegurar la permanencia y compatibilidad en el funcionamiento de los códigos de un proyecto, cada proyecto de Python debe incluir la definición del entorno de trabajo: versión de Python, librerías, etc. Este entorno se presenta en la forma de un directorio que contiene las versiones de los módulos y librerías necesarios.</p>
+
+    <h3>Procedimiento</h3>
+    <ol>
+        <li>Abre una ventana de línea de comando <code>cmd</code> desde el menú de inicio de Windows.</li>
+        <li>Navega al directorio de la versión de Python que se utilizará con el comando:</li>
+        <pre><code>CD c:\Users\login\PyVersions\Python312</code></pre>
+        <p><code>login</code> es el nombre del usuario que se está usando desde el ordenador</p>
+        <li>Desde ese directorio, crea el entorno virtual de trabajo asociado al proyecto con el comando:</li>
+        <pre><code>python -m venv C:\Users\login\PyVenv\LearningCurve</code></pre>
+        <p>Esto creará una nueva carpeta en el directorio <code>C:\Users\login\PyVenv\</code> llamada <code>LearningCurve</code>, aquí podrá poner el nombre del proyecto que esté trabajando</p>
+        <li>Navega al directorio del entorno virtual:</li>
+        <pre><code>CD C:\Users\login\PyVenv\LearningCurve</code></pre>
+        <li>Activa el entorno virtual con el comando:</li>
+        <pre><code>C:\Users\login\PyVenv\LearningCurve\Scripts\activate</code></pre>
+        <p>Verifica que no hay ningún módulo o librería adicional con el comando: <code>pip freeze.</code></p>
+        <li>Para desactivar el entorno virtual, utiliza el comando <code>deactivate</code>.</li>
+    </ol>
+
+    <h2>IV - Instalación de librerías y módulos necesarios</h2>
+    <p>El entorno virtual de cada proyecto tendrá dos componentes: uno propio del proyecto y otro específico al usuario. Estos aspectos se documentan en el archivo <code>requirements.txt</code></p>
+
+    <h3>Procedimiento</h3>
+    <ol>
+        <li>Abre una ventana de comando, navega al repertorio del entorno virtual y actívalo:</li>
+        <pre><code>CD C:\Users\login\PyVenv\LearningCurve\Scripts\activate</code></pre>
+        <li>Instala las librerías necesarias con el comando <code>pip install</code></li>
+        <p>Se tiene dos opciones una de estas si se está trabajando sobre un proyecto donde ya se ha definido todo el entorno virtual (por ejemplo, cuando se está trabajando con un clon de Github o se comparte el proyecto en local) en ese caso solo hay que obtener el fichero <code>requirements.txt</code>, se copia en el directorio del proyecto. Luego se instala todo el entorno virtual de trabajo con el comando siguiente:</p>
+        <pre><code>pip install -r C:\users\login\PyVenv\LearningCurve\requirements.txt</code></pre>
+        <p>Todos los módulos y librerías necesarios para la ejecución del proyecto serán instaladas y el entorno virtual estaría listo.</p>
+        <p>El otro escenario es comenzar de cero, para esto, una vez que se ha creado el entorno virtual en directorio específico (III-4) de esta guía. De aquí en adelante, suponemos que estamos en el directorio del entorno virtual. En nuestro ejemplo. <code>C:\Users\cb223735\PyVenv\LearningCurve\</code> Para verificar que no hay ningún módulo la comando <code>pip freeze</code> debe regresar una línea vacía, o una lista de los módulos/librerías instaladas.</p>
+        <p>A partir de este punto se procede a instalar uno por uno los diferentes módulos/librerías. Por ejemplo:</p>
+        <pre><code>
+pip install numpy
+pip install scipy
+pip install matplotlib
+pip install jupyterlab
+        </code></pre>
+        <li>Crea el archivo <code>requirements.txt</code> para documentar las librerías necesarias:</li>
+        <pre><code>pip freeze > C:\Users\login\PyVenv\LearningCurve\requirements.txt</code></pre>
+        <li>Para lanzar Jupyter Lab, utiliza el comando <code>jupyter-lab</code>. El programa preguntará por el núcleo que se desea utilizar y aparecerá el entorno virtual creado.</li>
+    </ol>
+
+    <h2>V - Supresión de un entorno virtual</h2>
+    <p>Una vez que el proyecto haya sido terminado y ya no se necesite más, se puede eliminar el entorno virtual:</p>
+    <ol>
+        <li>Desinstala todos los módulos y librerías utilizados con el comando:</li>
+        <pre><code>pip uninstall -r requirements.txt -y</code></pre>
+        <li>Desactiva el entorno virtual</li>
+        <pre><code>deactivate</code></pre>
+        <li>Borra todos los archivos y directorios asociados.</li>
+    </ol>
+    </main>
+    <!-- Enlace al archivo JavaScript -->
+    <script src="pages/js/scripts.js"></script>
+</body>
+</html>
