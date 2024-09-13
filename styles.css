@@ -140,3 +140,74 @@ button:hover {
         font-size: 18px;
     }
 }
+/* Estilos básicos que ya hemos definido antes */
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        margin-top: 10px;
+    }
+
+    .banner h1 {
+        font-size: 20px;
+    }
+
+    .recursos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes específicos para móviles */
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+        margin-top: 10px;
+    }
+
+    nav ul li {
+        margin-bottom: 5px;
+    }
+
+    .search-bar {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-bar input {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .banner h1 {
+        font-size: 18px;
+        padding: 20px;
+    }
+
+    .recursos-grid {
+        grid-template-columns: 1fr; /* Una columna para móviles */
+        gap: 15px;
+    }
+
+    .recurso h3 {
+        font-size: 14px; /* Ajustar el tamaño del texto */
+    }
+
+    button {
+        width: 100%; /* Botones más anchos en móviles */
+        padding: 10px;
+        font-size: 14px;
+    }
+}
