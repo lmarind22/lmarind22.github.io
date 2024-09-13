@@ -5,9 +5,43 @@
     box-sizing: border-box;
 }
 
+/* Estilo global para el cuerpo de la página */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    font-family: Arial, sans-serif; /* Fuente general */
+    line-height: 1.6; /* Altura de línea para mejorar la legibilidad */
+    margin: 0; /* Remover márgenes predeterminados del navegador */
+    padding: 0; /* Remover padding predeterminado del navegador */
+}
+
+/* Márgenes para el contenedor principal */
+main {
+    margin: 20px; /* Agregar un margen alrededor del contenido principal */
+    padding: 20px; /* Agregar padding dentro del contenido principal */
+    background-color: #f9f9f9; /* Color de fondo ligero para contraste */
+    border-radius: 10px; /* Bordes redondeados para un mejor acabado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+}
+
+/* Estilo para los encabezados */
+h1, h2 {
+    margin: 20px 0; /* Márgenes superiores e inferiores */
+}
+
+/* Estilo para los párrafos */
+p {
+    margin-bottom: 15px; /* Margen inferior para separar los párrafos */
+}
+
+/* Estilo para las listas */
+ul {
+    margin-bottom: 20px; /* Margen inferior para separar las listas */
+    padding-left: 20px; /* Sangría a la izquierda para las listas */
+}
+
+/* Estilo para ecuaciones matemáticas */
+.math {
+    margin: 20px 0; /* Margen superior e inferior para separar las ecuaciones */
+    text-align: center; /* Centrar las ecuaciones matemáticas */
 }
 
 /* Barra de navegación */
