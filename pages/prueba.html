@@ -3,147 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulación de la Ley de Snell con Colores de Medios</title>
+    <title>Simulación de Caída de Sólidos en Fluidos</title>
     <style>
         body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             font-family: Arial, sans-serif;
-            text-align: center;
+            background-color: #f0f0f0;
         }
-        .canvas-container {
+
+        #simulation {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
             position: relative;
-            width: 600px;
+        }
+
+        .fluid {
+            width: 120px;
             height: 400px;
-            margin: 20px auto;
             border: 2px solid #333;
+            position: relative;
+            margin: 0 20px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 95%, rgba(200, 200, 200, 0.1));
         }
-        #snellCanvas {
+
+        #agua {
+            background-color: rgba(0, 0, 255, 0.2);
+        }
+
+        #aceite {
+            background-color: rgba(255, 215, 0, 0.2);
+        }
+
+        #glicerina {
+            background-color: rgba(75, 0, 130, 0.2);
+        }
+
+        .solid {
+            width: 20px;
+            height: 20px;
+            background-color: #888;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .distance-marker {
+            position: absolute;
+            left: 5px;
             width: 100%;
-            height: 100%;
+            border-top: 1px dashed #000;
+            text-align: left;
+            font-size: 10px;
         }
-        #controls {
-            margin-top: 20px;
+
+        .time-display {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
-        label {
-            margin-right: 10px;
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .chart-container {
+            width: 400px;
+            margin: 20px;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Simulación de la Ley de Snell</h1>
-    <div id="controls">
-        <label for="n1">Índice de refracción del medio 1 (n1):</label>
-        <input type="number" id="n1" value="1" min="1" step="0.01" onchange="simularLeySnell()"><br><br>
-        <label for="n2">Índice de refracción del medio 2 (n2):</label>
-        <input type="number" id="n2" value="1.5" min="1" step="0.01" onchange="simularLeySnell()"><br><br>
-        <label for="angulo">Ángulo de incidencia (°):</label>
-        <input type="range" id="angulo" value="30" min="0" max="90" step="1" oninput="simularLeySnell()">
-        <span id="angulo-value">30°</span><br><br>
+    <h1>Caída de un sólido en fluidos</h1>
+    <div class="time-display" id="timeDisplay">Tiempo: 0.00 s</div>
+    <div id="simulation">
+        <div class="fluid" id="agua">
+            <div class="solid" id="solid-agua"></div>
+            <div class="distance-marker" style="top: 0%">0.00 m</div>
+            <div class="distance-marker" style="top: 10%">0.03 m</div>
+            <div class="distance-marker" style="top: 20%">0.06 m</div>
+            <div class="distance-marker" style="top: 30%">0.09 m</div>
+            <div class="distance-marker" style="top: 40%">0.12 m</div>
+            <div class="distance-marker" style="top: 50%">0.15 m</div>
+            <div class="distance-marker" style="top: 60%">0.18 m</div>
+            <div class="distance-marker" style="top: 70%">0.21 m</div>
+            <div class="distance-marker" style="top: 80%">0.24 m</div>
+            <div class="distance-marker" style="top: 90%">0.27 m</div>
+            <div class="distance-marker" style="top: 100%">0.30 m</div>
+        </div>
+        <div class="fluid" id="aceite">
+            <div class="solid" id="solid-aceite"></div>
+            <div class="distance-marker" style="top: 0%">0.00 m</div>
+            <div class="distance-marker" style="top: 10%">0.03 m</div>
+            <div class="distance-marker" style="top: 20%">0.06 m</div>
+            <div class="distance-marker" style="top: 30%">0.09 m</div>
+            <div class="distance-marker" style="top: 40%">0.12 m</div>
+            <div class="distance-marker" style="top: 50%">0.15 m</div>
+            <div class="distance-marker" style="top: 60%">0.18 m</div>
+            <div class="distance-marker" style="top: 70%">0.21 m</div>
+            <div class="distance-marker" style="top: 80%">0.24 m</div>
+            <div class="distance-marker" style="top: 90%">0.27 m</div>
+            <div class="distance-marker" style="top: 100%">0.30 m</div>
+        </div>
+        <div class="fluid" id="glicerina">
+            <div class="solid" id="solid-glicerina"></div>
+            <div class="distance-marker" style="top: 0%">0.00 m</div>
+            <div class="distance-marker" style="top: 10%">0.03 m</div>
+            <div class="distance-marker" style="top: 20%">0.06 m</div>
+            <div class="distance-marker" style="top: 30%">0.09 m</div>
+            <div class="distance-marker" style="top: 40%">0.12 m</div>
+            <div class="distance-marker" style="top: 50%">0.15 m</div>
+            <div class="distance-marker" style="top: 60%">0.18 m</div>
+            <div class="distance-marker" style="top: 70%">0.21 m</div>
+            <div class="distance-marker" style="top: 80%">0.24 m</div>
+            <div class="distance-marker" style="top: 90%">0.27 m</div>
+            <div class="distance-marker" style="top: 100%">0.30 m</div>
+        </div>
+    </div>
+    <div>
+        <button onclick="startSimulation()">Iniciar Simulación</button>
+        <button onclick="pauseSimulation()">Pausar/Continuar Simulación</button>
+        <button onclick="downloadData()">Descargar Datos</button>
     </div>
 
-    <div class="canvas-container">
-        <canvas id="snellCanvas" width="600" height="400"></canvas>
+    <div class="chart-container">
+        <canvas id="chartAgua"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="chartAceite"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="chartGlicerina"></canvas>
     </div>
 
     <script>
-        function simularLeySnell() {
-            const n1 = parseFloat(document.getElementById('n1').value);
-            const n2 = parseFloat(document.getElementById('n2').value);
-            const anguloIncidencia = parseFloat(document.getElementById('angulo').value);
+        let startTime;
+        let timerInterval;
+        let paused = false;
+        let intervals = {};
+        let charts = {};
+        let currentTime = 0; // Variable para mantener el tiempo real
+        let dataAgua = { time: [], position: [] };
+        let dataAceite = { time: [], position: [] };
+        let dataGlicerina = { time: [], position: [] };
 
-            // Actualizar el texto del ángulo
-            document.getElementById('angulo-value').textContent = `${anguloIncidencia}°`;
+        function startSimulation() {
+            if (paused) return; 
+            startTime = new Date().getTime();
+            timerInterval = setInterval(updateTimeDisplay, 100);
 
-            const radianesIncidencia = anguloIncidencia * Math.PI / 180; // Convertir a radianes
-            const senoRefraccion = (n1 / n2) * Math.sin(radianesIncidencia);
+            let timeWater = 1500; 
+            let timeOil = 3000;   
+            let timeGlycerin = 10000; 
 
-            // Comprobación para ver si hay reflexión interna total
-            if (senoRefraccion > 1) {
-                dibujarSimulacion(n1, n2, anguloIncidencia, null);
-                return;
+            function fallSolid(solidId, time, data, chartId) {
+                let solid = document.getElementById(solidId);
+                let position = 0;
+                intervals[solidId] = setInterval(() => {
+                    if (!paused) {
+                        if (position >= 380) {
+                            clearInterval(intervals[solidId]);
+                            if (Object.values(intervals).every(i => !i)) clearInterval(timerInterval);
+                        } else {
+                            position += 1;
+                            currentTime += time / 380;
+                            solid.style.top = position + 'px';
+                            data.time.push((currentTime / 1000).toFixed(2)); 
+                            data.position.push((position / 380 * 0.3).toFixed(3)); 
+                            updateChart(chartId, data);
+                        }
+                    }
+                }, time / 380);
             }
 
-            const anguloRefraccion = Math.asin(senoRefraccion) * (180 / Math.PI); // Convertir a grados
-            dibujarSimulacion(n1, n2, anguloIncidencia, anguloRefraccion);
+            fallSolid('solid-agua', timeWater, dataAgua, 'chartAgua');
+            fallSolid('solid-aceite', timeOil, dataAceite, 'chartAceite');
+            fallSolid('solid-glicerina', timeGlycerin, dataGlicerina, 'chartGlicerina');
+
+            charts['chartAgua'] = initializeChart('chartAgua', 'Posición vs Tiempo - Agua');
+            charts['chartAceite'] = initializeChart('chartAceite', 'Posición vs Tiempo - Aceite');
+            charts['chartGlicerina'] = initializeChart('chartGlicerina', 'Posición vs Tiempo - Glicerina');
         }
 
-        function obtenerColorMedio(n) {
-            // Determinar el color en función del índice de refracción (n)
-            if (n <= 1) return '#b3e5fc'; // Azul claro para aire o vacío (n cercano a 1)
-            else if (n <= 1.33) return '#81d4fa'; // Azul para agua (n típico 1.33)
-            else if (n <= 1.5) return '#4fc3f7'; // Azul más oscuro para vidrio (n típico 1.5)
-            else if (n <= 2.42) return '#0288d1'; // Azul profundo para diamante (n típico 2.42)
-            else return '#01579b'; // Azul muy oscuro para índices mayores
-        }
-
-        function dibujarSimulacion(n1, n2, anguloIncidencia, anguloRefraccion) {
-            const canvas = document.getElementById('snellCanvas');
-            const ctx = canvas.getContext('2d');
-
-            // Limpiar el canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Obtener colores para los medios en función de sus índices de refracción
-            const colorMedio1 = obtenerColorMedio(n1);
-            const colorMedio2 = obtenerColorMedio(n2);
-
-            // Dibujar los medios con colores diferentes
-            ctx.fillStyle = colorMedio1;
-            ctx.fillRect(0, 0, canvas.width, canvas.height / 2);
-
-            ctx.fillStyle = colorMedio2;
-            ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
-
-            // Dibujar la línea de separación de los medios
-            ctx.beginPath();
-            ctx.moveTo(0, canvas.height / 2);
-            ctx.lineTo(canvas.width, canvas.height / 2);
-            ctx.strokeStyle = 'black';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Dibujar el rayo incidente
-            ctx.beginPath();
-            ctx.moveTo(canvas.width / 2, canvas.height / 2);
-            const xIncidencia = canvas.width / 2 - (canvas.height / 2) * Math.tan(anguloIncidencia * Math.PI / 180);
-            ctx.lineTo(xIncidencia, 0);
-            ctx.strokeStyle = 'red';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Dibujar el rayo refractado o reflejado
-            if (anguloRefraccion !== null) {
-                // Rayo refractado
-                ctx.beginPath();
-                ctx.moveTo(canvas.width / 2, canvas.height / 2);
-                const xRefraccion = canvas.width / 2 + (canvas.height / 2) * Math.tan(anguloRefraccion * Math.PI / 180);
-                ctx.lineTo(xRefraccion, canvas.height);
-                ctx.strokeStyle = 'blue';
-                ctx.lineWidth = 2;
-                ctx.stroke();
+        function pauseSimulation() {
+            paused = !paused;
+            if (paused) {
+                clearInterval(timerInterval);
             } else {
-                // Rayo reflejado internamente
-                ctx.beginPath();
-                ctx.moveTo(canvas.width / 2, canvas.height / 2);
-                const xReflexion = canvas.width / 2 - (canvas.height / 2) * Math.tan(anguloIncidencia * Math.PI / 180);
-                ctx.lineTo(xReflexion, canvas.height);
-                ctx.strokeStyle = 'green';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-            }
-
-            // Etiquetas de los ángulos
-            ctx.fillStyle = 'black';
-            ctx.font = '14px Arial';
-            ctx.fillText(`Ángulo de Incidencia: ${anguloIncidencia.toFixed(2)}°`, 10, 20);
-            if (anguloRefraccion !== null) {
-                ctx.fillText(`Ángulo de Refracción: ${anguloRefraccion.toFixed(2)}°`, 10, 40);
-            } else {
-                ctx.fillText(`Reflexión Interna Total`, 10, 40);
+                startTime = new Date().getTime() - currentTime; 
+                timerInterval = setInterval(updateTimeDisplay, 100);
             }
         }
 
-        // Inicializar la simulación con valores por defecto
-        simularLeySnell();
+        function updateTimeDisplay() {
+            const elapsedTime = (currentTime / 1000).toFixed(2);
+            document.getElementById('timeDisplay').textContent = `Tiempo: ${elapsedTime} s`;
+        }
+
+        function initializeChart(canvasId, title) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            return new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Posición (m)',
+                        data: [],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tiempo (s)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Posición (m)'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart(chartId, data) {
+            const chart = charts[chartId];
+            chart.data.labels = data.time;
+            chart.data.datasets[0].data = data.position;
+            chart.update();
+        }
+
+        function downloadData() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Fluido, Tiempo (s), Posición (m)\n";
+
+            function appendData(data, fluidName) {
+                for (let i = 0; i < data.time.length; i++) {
+                    csvContent += `${fluidName}, ${data.time[i]}, ${data.position[i]}\n`;
+                }
+            }
+
+            appendData(dataAgua, "Agua");
+            appendData(dataAceite, "Aceite");
+            appendData(dataGlicerina, "Glicerina");
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "datos_simulacion.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 </body>
 </html>
